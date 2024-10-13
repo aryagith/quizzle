@@ -1,6 +1,6 @@
-import { DefaultSession, NextAuthOptions } from "next-auth";
+import NextAuth, { DefaultSession, getServerSession, NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "./db";
+import { prisma } from "../../../lib/db";
 import GoogleProvider from 'next-auth/providers/google'
 
 declare module 'next-auth'{
@@ -17,9 +17,9 @@ declare module 'next-auth/jwt'{
     }
 }
 
-export const authOperations: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
     session: {
-        strategy : 'jwt'
+        strategy : 'jwt'//using JSON Web Tokens for maintaining user session data etc.
     },
     callbacks: {
         jwt: async({token}) => {
@@ -53,3 +53,9 @@ export const authOperations: NextAuthOptions = {
         })
     ]
 }
+
+export const getAuthSession = () => {
+    return getServerSession(authOptions)
+}
+
+export default NextAuth(authOptions);
