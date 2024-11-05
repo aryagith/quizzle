@@ -11,7 +11,7 @@ const QuizMeCard = (props: Props) => {
     const router = useRouter();
     return (
     <Card
-      className="hover:cursor-pointer hover:opacity-50"
+      className="hover:cursor-pointer hover:opacity-50 hover:border-2"
       onClick={() => {
         router.push("/quiz");
       }}

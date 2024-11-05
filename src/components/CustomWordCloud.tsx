@@ -29,6 +29,8 @@ const fontSizeMapper = (word:{ value: number}) => {
     return Math.log2(word.value)*6 + 10;
 }
 
+const isSystemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 const CustomWordCloud = (props: Props) => {
     const theme = useTheme();
     return (
@@ -39,7 +41,7 @@ const CustomWordCloud = (props: Props) => {
     fontSize={fontSizeMapper}
     rotate={0}
     padding={10}
-    fill={theme.theme == "dark" ? "white" : "black"}
+    fill={theme.theme === "dark" || (theme.theme === "system" && isSystemDarkMode) ? "white" : "black"}
     data={data}
     />
     </>
