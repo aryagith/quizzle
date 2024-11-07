@@ -62,7 +62,7 @@ model Game {
   userId String
   timeStarted DateTime
   topic String
-  timeEnded DateTime
+  timeEnded DateTime?
   gameType GameType
   user  User @relation(fields: [userId], references: [id], onDelete: Cascade)
   questions Question[]
@@ -70,6 +70,8 @@ model Game {
   @@index([userId], name: "userId")
   
 }
+
+
 
 model Question {
   id String @id @default(cuid())

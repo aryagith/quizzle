@@ -7,22 +7,22 @@ type Props = {
 }
 
 const data = [
+    // {
+    //     text: "Thank you!",
+    //     value: 3,
+    // },
+    // {
+    //     text: 'Until then check out the "Quiz Me!" tab!',
+    //     value: 5,
+    // },
     {
-        text: "lorem ipsum",
-        value: 3,
-    },
-    {
-        text: "hello world",
-        value: 5,
-    },
-    {
-        text: "test",
+        text: "This feature is coming soon!!",
         value: 10,
     },
-    {
-        text: "test",
-        value: 3,
-    },
+    // {
+    //     text: "This feature is coming soon!!",
+    //     value: 2,
+    // },
 ]
 
 const fontSizeMapper = (word:{ value: number}) => {
