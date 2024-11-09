@@ -71,6 +71,13 @@ model Game {
   
 }
 
+model TopicCount {
+  id String @id @default(cuid())
+  topic String @unique
+  count Int
+  
+}
+
 
 
 model Question {

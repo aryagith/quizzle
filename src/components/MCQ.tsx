@@ -9,7 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import { NextResponse } from 'next/server';
 import MCQCounter from './MCQCounter';
 import { Toaster } from '@/components/ui/toaster';
-import { checkAnswerSchema } from '@/schemas/questions';
+import { checkAnswerSchema, endGameSchema } from '@/schemas/questions';
 import { z } from 'zod';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
@@ -53,15 +53,15 @@ const MCQ = ({ game }: Props) => {
     },
   });
 
-  // const { mutate: endGame } = useMutation({
-  //   mutationFn: async () => {
-  //     const payload: z.infer<typeof endGameSchema> = {
-  //       gameId: game.id,
-  //     };
-  //     const response = await axios.post(`/api/endGame`, payload);
-  //     return response.data;
-  //   },
-  // });
+  const { mutate: endGame } = useMutation({
+    mutationFn: async () => {
+      const payload: z.infer<typeof endGameSchema> = {
+        gameId: game.id,
+      };
+      const response = await axios.post(`/api/endGame`, payload);
+      return response.data;
+    },
+  });
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -97,14 +97,14 @@ const MCQ = ({ game }: Props) => {
           });
         }
         if (questionIndex === game.questions.length - 1) {
-          // endGame();
+          endGame();
           setHasEnded(true);
           return;
         }
         setQuestionIndex((questionIndex) => questionIndex + 1);
       },
     });
-  }, [checkAnswer, questionIndex, game.questions.length, toast, {/*endGame*/}]);
+  }, [checkAnswer, questionIndex, game.questions.length, toast, endGame]);
 
   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

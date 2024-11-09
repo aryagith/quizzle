@@ -8,7 +8,8 @@ import HotTopicsCard from '@/components/dashboard/HotTopicsCard'
 type Props = {}
 
 const Dashboard = async (props: Props) => {
-    const session= await getAuthSession()
+    
+  const session= await getAuthSession()
     if (!session?.user){
         return redirect("/");
     }

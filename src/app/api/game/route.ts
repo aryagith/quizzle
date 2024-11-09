@@ -31,11 +31,11 @@ export async function POST(req: Request, res: Response) {
       });
       console.log("Game created with ID:", game.id);
   
-      // await prisma.topic_count.upsert({
-      //   where: { topic },
-      //   create: { topic, count: 1 },
-      //   update: { count: { increment: 1 } },
-      // });
+      await prisma.topicCount.upsert({
+        where: { topic },
+        create: { topic, count: 1 },
+        update: { count: { increment: 1 } },
+      });
       console.log("Topic count upserted for topic:", topic); //logs for debugging
 
       const { data } = await axios.post(
@@ -45,6 +45,14 @@ export async function POST(req: Request, res: Response) {
       console.log("Questions fetched from external API:", data);
   
       if (type === "mcq") {
+        type mcqQuestion = {
+          question: string;
+          answer: string;
+          option1: string;
+          option2: string;
+          option3: string;
+        };
+
         const manyData = data.questions.map((question: mcqQuestion) => {
           const options = [
             question.option1,
@@ -65,6 +73,11 @@ export async function POST(req: Request, res: Response) {
         await prisma.question.createMany({ data: manyData });
         console.log("MCQ questions inserted into the database");
       } else if (type === "open_ended") {
+        type openQuestion = {
+          question: string;
+          answer: string;
+        };
+
         await prisma.question.createMany({
           data: data.questions.map((question: openQuestion) => ({
             question: question.question,

@@ -33,7 +33,7 @@ export const POST = async (req:Request, res: Response) => {
     }
     else if(type === 'mcq'){
       questions = await strict_output(
-        "You are a tricky AI that is able to generate mcq questions and answers, the length of each answer should not be more than 15 words, store all answers and questions and options in a JSON array. Do not make the answer the same as any of the other options. Do not make the answer obvious.",
+        `You are a quiz creation AI. You are to create MCQ question and answer for a topic given to you. Do not reveal the answer in the options. For example, if the question is "Which dog is the smallest dog in the world?" an option/answer should not be, "The chihuahua is the smallest dog in the world." it should be "Chihuahua".The answer should not be the same as any of the other options. Only generate ${amount} questions and it's options at a time.`,
         new Array(amount).fill(
           `You are to generate a random hard mcq question about ${topic}.`
         ),

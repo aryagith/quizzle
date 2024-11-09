@@ -16,7 +16,7 @@ const Navbar = async (props: Props) => {
         <div className="flex items-center justify-between h-full gap-2 px-8 mx-auto max-w-7xl">
         {/*Logo*/}
         <Link href={'/'} className="flex items-center gap-2">
-        <p className='rounded-full border-0 px-2 py-1 text-xl font-bold transition-all hover:border-0 hover:border-b-4 hover:border-r-4 md:block dark:border-white'>
+        <p className='rounded-lg border-black border-2 px-2 py-1 text-xl font-bold transition-all hover:-translate-y-1 border-b-4 border-r-4 md:block dark:border-white'>
          Quizzle
         </p>
         </Link>
