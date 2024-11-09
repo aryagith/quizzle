@@ -37,7 +37,7 @@ export async function POST(req: Request, res: Response) {
         update: { count: { increment: 1 } },
       });
       console.log("Topic count upserted for topic:", topic); //logs for debugging
-
+      console.log('API URL:', process.env.API_URL);
       const { data } = await axios.post(
         `${process.env.API_URL as string}/api/questions`,
         { amount, topic, type }
