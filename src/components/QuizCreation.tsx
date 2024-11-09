@@ -15,11 +15,13 @@ import { useRouter } from 'next/navigation';
 import axios, { AxiosError } from 'axios';
 import LoadingQuestions from './LoadingQuestions';
 
-type Props = {}
+type Props = {
+  topicParam : string
+}
 
 type Input = z.infer<typeof quizCreationSchema>
 
-const QuizCreation = (props: Props) => {
+const QuizCreation = ({topicParam}: Props) => {
   const router = useRouter()
   const [showLoader , setShowLoader] = useState(false);
   const [finished , setFinished] = useState(false);
@@ -36,7 +38,7 @@ const QuizCreation = (props: Props) => {
   const form = useForm<Input>({
       resolver: zodResolver(quizCreationSchema),
       defaultValues: {
-        topic: "",
+        topic: topicParam,
         type: "mcq",
         amount:3, 
       }

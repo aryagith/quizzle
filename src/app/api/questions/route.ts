@@ -21,7 +21,7 @@ export const POST = async (req:Request, res: Response) => {
     let questions: any;
     if (type === 'open_ended'){
       questions = await strict_output(
-        "You are a helpful AI that is able to generate a pair of question and answers, the length of each answer should not be more than 15 words, store all the pairs of answers and questions in a JSON array.",
+        `You are a helpful AI that is able to generate a pair of question and answers, the length of each answer should not be more than 15 words, store all the pairs of answers and questions in a JSON array. Only generate ${amount} questions.`,
         new Array(amount).fill(
           `You are to generate a random hard open-ended questions about ${topic}`
         ),
@@ -33,7 +33,7 @@ export const POST = async (req:Request, res: Response) => {
     }
     else if(type === 'mcq'){
       questions = await strict_output(
-        `You are a quiz creation AI. You are to create MCQ question and answer for a topic given to you. Do not reveal the answer in the options. For example, if the question is "Which dog is the smallest dog in the world?" an option/answer should not be, "The chihuahua is the smallest dog in the world." it should be "Chihuahua".The answer should not be the same as any of the other options. Only generate ${amount} questions and it's options at a time.`,
+        `You are a quiz creation AI. You are to create MCQ question and answer for a topic given to you. Do not reveal the answer in the options. For example, if the question is "Which dog is the smallest dog in the world?" an option/answer should not be, "The chihuahua is the smallest dog in the world." it should be "Chihuahua". The answer should NOT be the same as any of the other options. Only generate ${amount} questions and it's options at a time.`,
         new Array(amount).fill(
           `You are to generate a random hard mcq question about ${topic}.`
         ),

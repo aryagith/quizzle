@@ -1,5 +1,6 @@
 'use client';
 import { useTheme } from 'next-themes'
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import D3WordCloud from 'react-d3-cloud'
 
@@ -15,6 +16,7 @@ const isSystemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-
 
 const CustomWordCloud = ( {formattedTopics}: Props) => {
     const theme = useTheme();
+    const router= useRouter();
     return (
     <>
     <D3WordCloud 
@@ -25,6 +27,9 @@ const CustomWordCloud = ( {formattedTopics}: Props) => {
     padding={10}
     fill={theme.theme === "dark" || (theme.theme === "system" && isSystemDarkMode) ? "white" : "black"}
     data={formattedTopics}
+    onWordClick={(event, word)=>{
+        router.push(`/quiz?topic=${word.text}`);
+    }}
     />
     </>
   )
